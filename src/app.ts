@@ -25,6 +25,14 @@ if (process.env.PROJ_ENV === 'DEV' || process.env.PROJ_ENV === 'PRODUCTION') {
  }
 app.use("/", authRouter);
 app.use("/", productRouters)
+app.get("/", (req: Request, res: Response) => {
+    res.status(200).json({
+      status: "success",
+      message: "Welcome to the API",
+      serverTime: new Date().toISOString(),
+      version: "1.0.0"
+    });
+  });
 app.use((req:Request, res:Response, next:NextFunction)=>{
     failedResponse(res, 404, `Invalid endpoint, inspect url again.`)
 })
